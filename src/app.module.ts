@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ChattingController } from './controller/chatting.controller';
-import { ChattingService } from './service/chatting.service';
+import { ChattingProduceService } from './service/chattingProduce.service';
+import { KAFKA_TOKEN } from './common/constants';
+import { KafkaModule } from './kafka/kafka.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController, ChattingController],
-  providers: [AppService, ChattingService],
+  imports: [KafkaModule],
+  controllers: [ChattingController],
+  providers: [ChattingProduceService],
 })
 export class AppModule {}

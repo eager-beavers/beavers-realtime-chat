@@ -1,4 +1,4 @@
-export class ChattingMessageModel {
+export interface ChattingMessageModel {
   owner: string;
   message: string;
   createAt: number;
