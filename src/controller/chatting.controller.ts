@@ -19,6 +19,5 @@ export class ChattingController {
       topic: KAFKA_TOKEN.topic,
       messages: [{ value: JSON.stringify(message) }],
     });
-    console.log("POST TSET");
   }
 }
