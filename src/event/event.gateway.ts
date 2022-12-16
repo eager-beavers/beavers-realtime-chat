@@ -55,21 +55,12 @@ export class EventGateway
       message: `${socket.id}가 들어왔습니다.`,
     });
 
-    socket.broadcast.emit('message', {
-      message: `${socket.id}가 들어왔습니다.`,
-    });
-
     await this.consumerService.consume(
       { topics: [KAFKA_TOKEN.topic] },
       {
         eachMessage: async ({ topic, partition, message }) => {
-          console.log(123);
-          console.log({
-            value: message.value.toString(),
-            topic: topic.toString(),
-            partition: partition.toString(),
-          });
-          socket.broadcast.emit('message', '완전 괜찮아');
+          this.logger.log(JSON.parse(message.value.toString()));
+          socket.broadcast.emit('message', JSON.parse(message.value.toString()));
         },
       },
     );
